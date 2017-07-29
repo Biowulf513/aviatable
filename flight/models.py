@@ -1,4 +1,5 @@
 from django.db import models
+from flight.utils import code_generation
 
 class PlaneType(models.Model):
 
@@ -38,15 +39,9 @@ class Plane(models.Model):
                                   blank=True)
     fly_col = models.PositiveSmallIntegerField('Кол-во полётов', null=True,
                                                blank=True)
-    def reg_numb_generation(self):
-        import random
-        reg_numb = ''
-        for x in range(6):
-            reg_numb += random.choice(list('123456789QWERTYUIOPASDFGHJKLZXCVBNM'))
-        return reg_numb
 
     def save(self, *args, **kwargs):
-        self.reg_numb = self.reg_numb_generation()
+        self.reg_numb = code_generation()
         super(Plane, self).save(*args,**kwargs)
 
     def __str__(self):
