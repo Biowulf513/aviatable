@@ -46,3 +46,13 @@ class Plane(models.Model):
 
     def __str__(self):
         return ((self.plane_type.name) + ' | ' + (self.reg_numb))
+
+class Country(models.Model):
+    class Meta:
+        verbose_name = "Страна"
+        verbose_name_plural = "Страны"
+
+    name = models.CharField(max_length=40, verbose_name='Название Страны')
+
+    def __str__(self):
+        return self.name
