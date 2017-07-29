@@ -67,3 +67,14 @@ class City(models.Model):
 
     def __str__(self):
         return self.name
+
+class Airport(models.Model):
+    class Meta:
+        verbose_name = "Аэропорт"
+        verbose_name_plural = "Аэропорты"
+
+    name = models.CharField(max_length=40, verbose_name='Название Аэропорта')
+    sity_position = models.ForeignKey(City, verbose_name='Город', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
