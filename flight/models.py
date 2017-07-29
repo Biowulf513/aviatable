@@ -1,5 +1,5 @@
 from django.db import models
-from flight.utils import code_generation
+from flight.utils import code_generation, route_name_generation
 
 class PlaneType(models.Model):
 
@@ -96,20 +96,13 @@ class Route(models.Model):
         name = '%s - %s | route %s | plane %s' % (self.airpotr_out.name, self.airpotr_in.name, self.code, self.plane.reg_numb)
         return name
 
-    def code_generation(self):
-        import random
-        from transliterate import translit
-        code_name = ''
-        code_name += self.airpotr_out.name[0:1]
-        code_name += self.airpotr_in.name[0:1]
-        for x in range(4):
-            code_name += random.choice(list('123456789'))
-        code_name = (translit(code_name ,reversed=True))
-        return code_name.upper()
+
 
     def save(self, *args, **kwargs):
         self.name = self.name_generation()
-        self.code = self.code_generation()
+        self.code = route_name_generation(
+            airpotr_in=self.airpotr_in,
+            airpotr_out=self.airpotr_out)
         super(Route, self).save(*args,**kwargs)
 
     def __str__(self):
