@@ -1,5 +1,5 @@
 from django.db import models
-from flight.utils import code_generation
+from flight.utils import code_generation, route_name_generation
 
 class PlaneType(models.Model):
 
@@ -78,3 +78,32 @@ class Airport(models.Model):
 
     def __str__(self):
         return self.name
+
+class Route(models.Model):
+    class Meta:
+        verbose_name = "Маршрут"
+        verbose_name_plural = "Маршруты"
+
+    code = models.CharField(max_length=20, editable=False, verbose_name='Код рейса')
+    plane = models.ForeignKey(
+        Plane, verbose_name='Самолёт' , on_delete=models.CASCADE)
+    airpotr_out = models.ForeignKey(
+        'Airport', related_name='line_out', verbose_name='Аэропорт вылета', on_delete=models.CASCADE)
+    airpotr_in = models.ForeignKey(
+        'Airport', related_name='line_in', verbose_name='Аэропорт влёта', on_delete=models.CASCADE)
+
+    def name_generation(self):
+        name = '%s - %s | route %s | plane %s' % (self.airpotr_out.name, self.airpotr_in.name, self.code, self.plane.reg_numb)
+        return name
+
+
+
+    def save(self, *args, **kwargs):
+        self.name = self.name_generation()
+        self.code = route_name_generation(
+            airpotr_in=self.airpotr_in,
+            airpotr_out=self.airpotr_out)
+        super(Route, self).save(*args,**kwargs)
+
+    def __str__(self):
+        return self.name_generation()
