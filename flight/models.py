@@ -46,3 +46,35 @@ class Plane(models.Model):
 
     def __str__(self):
         return ((self.plane_type.name) + ' | ' + (self.reg_numb))
+
+class Country(models.Model):
+    class Meta:
+        verbose_name = "Страна"
+        verbose_name_plural = "Страны"
+
+    name = models.CharField(max_length=40, verbose_name='Название Страны')
+
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    class Meta:
+        verbose_name = "Город"
+        verbose_name_plural = "Города"
+
+    name = models.CharField(max_length=40, verbose_name='Название Города')
+    country_position = models.ForeignKey(Country, verbose_name='Страна', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class Airport(models.Model):
+    class Meta:
+        verbose_name = "Аэропорт"
+        verbose_name_plural = "Аэропорты"
+
+    name = models.CharField(max_length=40, verbose_name='Название Аэропорта')
+    sity_position = models.ForeignKey(City, verbose_name='Город', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
