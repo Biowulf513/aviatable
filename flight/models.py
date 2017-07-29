@@ -56,3 +56,14 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+
+class City(models.Model):
+    class Meta:
+        verbose_name = "Город"
+        verbose_name_plural = "Города"
+
+    name = models.CharField(max_length=40, verbose_name='Название Города')
+    country_position = models.ForeignKey(Country, verbose_name='Страна', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
