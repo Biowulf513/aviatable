@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from flight.views import all_route
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', all_route, name='index'),
 ]
