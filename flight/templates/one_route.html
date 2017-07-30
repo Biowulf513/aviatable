@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
 
 {% block title %}
-INDEX
+{{ route.code }}
 {% endblock %}
+
 {% block content %}
-
-
-<table class="table">
+    <table class="table">
         <thead>
             <tr>
                 <th>Рейс</th>
@@ -16,15 +15,12 @@ INDEX
             </tr>
         </thead>
         <tbody>
-
-            {% for route in routes%}
                 <tr>
-                    <td><a href="{% url 'one_route' route_id=route.id %}">{{ route.code }}</a></td>
+                    <td>{{ route.code }}</td>
                     <td>{{ route.airpotr_out }}</td>
                     <td>{{ route.airpotr_in }}</td>
                     <td>{{ route.plane }}</td>
                 </tr>
-            {% endfor %}
             </tbody>
      </table>
 {% endblock %}

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """aviatable URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,12 +15,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
-from django.contrib import admin
-from flight.views import all_route
+
+from django.conf.urls import url
+from flight.views import one_route
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', all_route, name='index'),
-    url(r'^flight/', include('flight.urls'), name='flight'),
+    url(r'^(?P<route_id>[0-9]+)/$', one_route, name='one_route'),
 ]
