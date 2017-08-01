@@ -13,6 +13,7 @@ def all_search(request):
               Q(code__icontains=query) | Q(plane__reg_numb__icontains=query)
             )
         else:
+            query = query.capitalize()
             search = Route.objects.filter(
                 Q(airpotr_out__name__icontains=query) | Q(airpotr_in__name__icontains=query)
             )
