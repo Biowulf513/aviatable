@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+# encodig: utf-8
 
 """aviatable URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
+
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -18,8 +20,10 @@ Including another URLconf
 
 from django.conf.urls import url
 from flight.views import one_route
-
+from flight.search import all_search
 
 urlpatterns = [
     url(r'^(?P<route_id>[0-9]+)/$', one_route, name='one_route'),
+    url(r'^search/$', all_search),
 ]
+

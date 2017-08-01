@@ -4,6 +4,7 @@ from transliterate import translit
 import random
 
 
+
 def code_generation(bad_text=None, text=''):
     if bad_text:
         text = ''
@@ -19,3 +20,12 @@ def route_name_generation(airpotr_out, airpotr_in, code_name=''):
     while len(code_name) < 6:
         code_name += random.choice(list(digits))
     return code_name.upper()
+
+def search_lang(search_text):
+    import re
+    if re.search(r'[^а-яА-Я]',search_text):
+        return 'eng'
+    else:
+        return 'ru'
+
+
