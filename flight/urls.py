@@ -24,5 +24,6 @@ from flight.search import all_search
 
 urlpatterns = [
     url(r'^(?P<route_id>[0-9]+)/$', one_route, name='one_route'),
-    url(r'^search/([^/]+)/$', all_search, name='search'),
+    url(r'^search/$', all_search),
 ]
+
