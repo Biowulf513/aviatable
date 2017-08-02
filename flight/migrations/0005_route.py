@@ -18,8 +18,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('code', models.CharField(editable=False, max_length=20, verbose_name='Код рейса')),
-                ('airpotr_in', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='line_in', to='flight.Airport', verbose_name='Аэропорт влёта')),
-                ('airpotr_out', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='line_out', to='flight.Airport', verbose_name='Аэропорт вылета')),
+                ('airport_in', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='line_in', to='flight.Airport', verbose_name='Аэропорт влёта')),
+                ('airport_out', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='line_out', to='flight.Airport', verbose_name='Аэропорт вылета')),
                 ('plane', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='flight.Plane', verbose_name='Самолёт')),
             ],
             options={

@@ -1,11 +1,12 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 
 {% block title %}
-{{ route.code }}
+INDEX
 {% endblock %}
-
 {% block content %}
-    <table class="table">
+
+
+<table class="table">
         <thead>
             <tr>
                 <th>Рейс</th>
@@ -15,12 +16,16 @@
             </tr>
         </thead>
         <tbody>
+
+            {% for route in search%}
                 <tr>
-                    <td>{{ route.code }}</td>
+                    <td><a href="{% url 'one_route' route_id=route.id %}">{{ route.code }}</a></td>
                     <td>{{ route.airport_out }}</td>
                     <td>{{ route.airport_in }}</td>
                     <td>{{ route.plane }}</td>
                 </tr>
+            {% endfor %}
             </tbody>
      </table>
+    {{ test }}
 {% endblock %}
