@@ -20,10 +20,11 @@ Including another URLconf
 
 from django.conf.urls import url
 from flight.views import one_route
-from flight.search import all_search
+from flight.search import all_search, form_search
 
 urlpatterns = [
     url(r'^(?P<route_id>[0-9]+)/$', one_route, name='one_route'),
     url(r'^search/$', all_search),
+    url(r'^search/form/$', form_search),
 ]
 

@@ -13,9 +13,9 @@ def code_generation(bad_text=None, text=''):
 
     return text
 
-def route_name_generation(airpotr_out, airpotr_in, code_name=''):
-    code_name += airpotr_out.name[0:1]
-    code_name += airpotr_in.name[0:1]
+def route_name_generation(airport_out, airport_in, code_name=''):
+    code_name += airport_out.name[0:1]
+    code_name += airport_in.name[0:1]
     code_name = (translit(code_name, reversed=True))
     while len(code_name) < 6:
         code_name += random.choice(list(digits))

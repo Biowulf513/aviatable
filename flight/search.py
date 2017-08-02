@@ -15,6 +15,26 @@ def all_search(request):
         else:
             query = query.capitalize()
             search = Route.objects.filter(
-                Q(airpotr_out__name__icontains=query) | Q(airpotr_in__name__icontains=query)
+                Q(airport_out__name__icontains=query) | Q(airport_in__name__icontains=query)
             )
         return render(request, 'search.html', {'search':search})
+
+def form_search(request):
+    if request.GET:
+        if request.GET.get('out'):
+            search = Route.objects.filter(
+                Q(airport_out__name__icontains=request.GET['out']))
+            return render(request, 'search.html', {'search': search})
+
+        elif request.GET.get('in'):
+            search = Route.objects.filter(
+                Q(airport_in__name__icontains=request.GET['in']))
+            return render(request, 'search.html', {'search': search})
+
+
+
+
+
+
+        # return render(request, 'search.html', {'test':request.GET})
+

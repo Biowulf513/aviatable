@@ -87,13 +87,13 @@ class Route(models.Model):
     code = models.CharField(max_length=20, editable=False, verbose_name='Код рейса')
     plane = models.ForeignKey(
         Plane, verbose_name='Самолёт' , on_delete=models.CASCADE)
-    airpotr_out = models.ForeignKey(
+    airport_out = models.ForeignKey(
         'Airport', related_name='line_out', verbose_name='Аэропорт вылета', on_delete=models.CASCADE)
-    airpotr_in = models.ForeignKey(
+    airport_in = models.ForeignKey(
         'Airport', related_name='line_in', verbose_name='Аэропорт влёта', on_delete=models.CASCADE)
 
     def name_generation(self):
-        name = '%s - %s | route %s | plane %s' % (self.airpotr_out.name, self.airpotr_in.name, self.code, self.plane.reg_numb)
+        name = '%s - %s | route %s | plane %s' % (self.airport_out.name, self.airport_in.name, self.code, self.plane.reg_numb)
         return name
 
 
@@ -101,8 +101,8 @@ class Route(models.Model):
     def save(self, *args, **kwargs):
         self.name = self.name_generation()
         self.code = route_name_generation(
-            airpotr_in=self.airpotr_in,
-            airpotr_out=self.airpotr_out)
+            airpotr_in=self.airport_in,
+            airpotr_out=self.airport_out)
         super(Route, self).save(*args,**kwargs)
 
     def __str__(self):
