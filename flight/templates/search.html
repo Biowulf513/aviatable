@@ -20,11 +20,12 @@ INDEX
             {% for route in search%}
                 <tr>
                     <td><a href="{% url 'one_route' route_id=route.id %}">{{ route.code }}</a></td>
-                    <td>{{ route.airpotr_out }}</td>
-                    <td>{{ route.airpotr_in }}</td>
+                    <td>{{ route.airport_out }}</td>
+                    <td>{{ route.airport_in }}</td>
                     <td>{{ route.plane }}</td>
                 </tr>
             {% endfor %}
             </tbody>
      </table>
+    {{ test }}
 {% endblock %}
