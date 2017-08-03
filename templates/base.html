@@ -36,9 +36,29 @@
                     <form action="/flight/search/" method="get" class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <input class="form-control" type="text" name="search_q"  placeholder="Поиск..." >
+
+
+                            <select name="out" name="out" >
+                                <option value="" hidden>Место вылета</option>
+                                {% for route in routes%}
+                                    <option value='{{ route.airport_out }}'>
+                                        {{ route.airport_out }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+
+                            <select name="in" name="in" >
+                                <option value="" hidden>Место прилёта</option>
+                                {% for route in routes%}
+                                    <option value='{{ route.airport_in }}'>
+                                        {{ route.airport_in }}
+                                    </option>
+                                {% endfor %}
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-default">Поиск</button>
                     </form>
+</div>
 
                 </div>
             </nav>
