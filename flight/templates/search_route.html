@@ -17,7 +17,7 @@ INDEX
         </thead>
         <tbody>
 
-            {% for route in search%}
+            {% for route in routes%}
                 <tr>
                     <td><a href="{% url 'one_route' route_id=route.id %}">{{ route.code }}</a></td>
                     <td>{{ route.airport_out }}</td>
