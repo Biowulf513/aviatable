@@ -1,72 +1,103 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{% block title %}{% endblock %}</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Выше 3 Мета-теги ** должны прийти в первую очередь в голове; любой другой руководитель контент *после* эти теги -->
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <title>{% block title %}{% endblock %}</title>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'flight/css/style.css' %}" />
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
+        <!-- HTML5 Shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- Предупреждение: Respond.js не работает при просмотре страницы через файл:// -->
+        <!--[if lt IE 9]>
 
-          <div class="row">
-            <nav role="navigation" class="navbar navbar-inverse">
-                <div class="container">
-                    <div id="navbarCollapse" class="collapse navbar-collapse navbar-left">
-                        <ul class="nav">
-                            <li>
-                                <a href="/"class="btn btn-default">
-                                    <span class="glyphicon glyphicon-home"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script >
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-                    <form action="/flight/search/" method="get" class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="search_q"  placeholder="Поиск..." >
+        <![endif]-->
+    </head>
 
+    <body>
+        <div id="header">
+        </div>
 
-                            <select name="out" name="out" >
-                                <option value="" hidden>Место вылета</option>
-                                {% for route in routes%}
-                                    <option value='{{ route.airport_out }}'>
-                                        {{ route.airport_out }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-
-                            <select name="in" name="in" >
-                                <option value="" hidden>Место прилёта</option>
-                                {% for route in routes%}
-                                    <option value='{{ route.airport_in }}'>
-                                        {{ route.airport_in }}
-                                    </option>
-                                {% endfor %}
-                            </select>
+        <div id="sidebar">
+            <div id="navigation">
+                <div class="navbar navbar-inverse navbar-static-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsive-menu">
+                                <span class="sr-only">Открыть навигацию</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
                         </div>
-                        <button type="submit" class="btn btn-default">Поиск</button>
-                    </form>
-</div>
 
+                        <div class="collapse navbar-collapse" id="responsive-menu">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/">Главная</a></li>
+                                <li><a href="/admin">Админка</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Поиск<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Текст1</a></li>
+                                        <li><a href="#">Текст2</a></li>
+                                        <li><a href="#">Текст3</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Текст4</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                            <form action="/flight/search/" method="get" class="navbar-form navbar-right" role="search">
+                                    <input class="form-control" type="text" name="search_q"  placeholder="Поиск..." >
+
+                                    <select name="out" name="out" >
+                                        <option value="" hidden>Место вылета</option>
+                                        {% for route in routes%}
+                                            <option value='{{ route.airport_out }}'>
+                                                {{ route.airport_out }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <select name="in" name="in" >
+                                        <option value="" hidden>Место прилёта</option>
+                                        {% for route in routes%}
+                                            <option value='{{ route.airport_in }}'>
+                                                {{ route.airport_in }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                <button type="submit" class="btn btn-default">Поиск</button>
+                            </form>
+
+                    </div>
                 </div>
-            </nav>
-
-            <div class="col-lg-6 col-lg-push-3 col-lg-pull-3">
-                {% block content %}
-                {% endblock %}
             </div>
+        </div>
+
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div id="big" class="col-md-8 col-md-push-2" >
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="footer">
         </div>
 
 
