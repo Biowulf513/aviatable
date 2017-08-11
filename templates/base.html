@@ -10,7 +10,7 @@
         <title>{% block title %}{% endblock %}</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'flight/css/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-search.css' %}" />
 
         <!-- HTML5 Shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- Предупреждение: Respond.js не работает при просмотре страницы через файл:// -->
@@ -24,8 +24,9 @@
 
     <body>
 
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container-fluid">
+
+        <div id="navigation">
+            <nav class="navbar navbar-inverse navbar-static-top">
                 <div class="navbar-header">
                     <!-- Кнопка «Гамбургер» отображается только в мобильном виде ) -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
@@ -42,44 +43,22 @@
                 <div class="collapse navbar-collapse" id="navbar-main">
                     <ul class="nav navbar-nav">
                         <li><a href="/admin">Админка</a></li>
-{#                        <li class="dropdown">#}
-{#                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Поиск<span class="caret"></span></a>#}
-{#                            <ul class="dropdown-menu">#}
-{#                                <li><a href="#">Текст1</a></li>#}
-{#                                <li><a href="#">Текст2</a></li>#}
-{#                                <li><a href="#">Текст3</a></li>#}
-{#                                <li role="separator" class="divider"></li>#}
-{#                                <li><a href="#">Текст4</a></li>#}
-{#                            </ul>#}
-{#                        </li>#}
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Раздел <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="#">Ссылка</a></li>
+                            <li><a href="#">Ссылка</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Ссылка</a></li>
+                          </ul>
+                        </li>
+                        <li>
+                            {% include 'search_test.html' %}
+                        </li>
                     </ul>
                 </div>
-
-{#                            <form action="/flight/search/" method="get" class="navbar-form navbar-right" role="search">#}
-{#                                    <input class="form-control" type="text" name="search_q"  placeholder="Поиск..." >#}
-{##}
-{#                                    <select name="out" name="out" >#}
-{#                                        <option value="" hidden>Место вылета</option>#}
-{#                                        {% for route in routes%}#}
-{#                                            <option value='{{ route.airport_out }}'>#}
-{#                                                {{ route.airport_out }}#}
-{#                                            </option>#}
-{#                                        {% endfor %}#}
-{#                                    </select>#}
-{##}
-{#                                    <select name="in" name="in" >#}
-{#                                        <option value="" hidden>Место прилёта</option>#}
-{#                                        {% for route in routes%}#}
-{#                                            <option value='{{ route.airport_in }}'>#}
-{#                                                {{ route.airport_in }}#}
-{#                                            </option>#}
-{#                                        {% endfor %}#}
-{#                                    </select>#}
-{#                                <button type="submit" class="btn btn-default">Поиск</button>#}
-{#                            </form>#}
-
-            </div>
-        </nav>
+            </nav>
+        </div>
 
 
         <div class="content">
@@ -93,7 +72,6 @@
             </div>
         </div>
 
-        <div class="clear"></div>
 
         <div id="footer">
         </div>
@@ -102,6 +80,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-{#    <script src="./bootstrap/js/bootstrap.min.js"></script>#}
+    <script src={% static 'bootstrap/js/bootstrap.js'%}></script>
+
   </body>
 </html>
