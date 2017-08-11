@@ -1,2 +1,10 @@
 .idea
 db.sqlite3
+static/admin
+.tgz
+aviatable/__init__.pyc
+aviatable/__pycache__/
+aviatable/settings.pyc
+flight/__pycache__/
+flight/migrations/__pycache__/
+/static/
