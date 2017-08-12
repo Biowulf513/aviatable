@@ -7,7 +7,7 @@ from flight.utils import search_lang
 
 def all_search(request, query=''):
     if request.GET:
-        if request.GET.get('search_q')!='':
+        if request.GET.get('search_q'):
             query=request.GET['search_q']
             if search_lang(query) != 'ru':
                 search = Route.objects.filter(
@@ -20,7 +20,8 @@ def all_search(request, query=''):
                 )
             return render(request, 'search_route.html', {'routes':search})
 
-        if request.GET.get('out')!='':
+
+        elif request.GET.get('out')!='':
             query=request.GET['out']
             search = Route.objects.filter(
                 Q(airport_out__name__icontains=query))
