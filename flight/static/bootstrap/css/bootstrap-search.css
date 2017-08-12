@@ -38,11 +38,15 @@
         position: static !important;
     }
     .dropdown.dropdown-lg .dropdown-menu {
-        min-width: 243px;
+        min-width: 246px;
     }
 
     .dropdown-menu-right {
-        right: 40px;
+        right: 39px;
 
     }
+}
+
+#search-dropdown-menu {
+    border-radius: 0px;
 }
