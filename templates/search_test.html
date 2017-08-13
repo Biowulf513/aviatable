@@ -25,8 +25,8 @@
                         <select name="in" class="form-control" >
                             <option value="" hidden></option>
                             {% for route in routes%}
-                                <option value='{{ route.airport_out }}'>
-                                    {{ route.airport_out }}
+                                <option value='{{ route.airport_in }}'>
+                                    {{ route.airport_in }}
                                 </option>
                             {% endfor %}
                         </select>
