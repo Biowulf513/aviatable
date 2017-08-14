@@ -48,7 +48,7 @@
                         </li>
                         {% if username %}
                             <li>
-                                <a href="/auth/logout/"> Выйти ({{ username }})</a>
+                                <a href="/auth/logout/"> Выйти ( {{ username.upper }} )</a>
                             </li>
                         {% else %}
                             <li>
@@ -74,7 +74,6 @@
                 </div>
             </div>
         </div>
-
 
         <div id="footer">
         </div>
