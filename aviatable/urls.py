@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from flight.views import all_route
-from aviatable.authenticate import login, logout
+from aviatable.authenticate import login, logout, registartion
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^flight/', include('flight.urls'), name='flight'),
     url(r'login/', login),
     url(r'logout/', logout),
+    url(r'registration/', registartion),
 ]

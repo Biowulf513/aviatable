@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, render
 from django.contrib import auth
 from django.template.context_processors import csrf
+from aviatable.forms import RegistrationForm
 
 def login(request):
     args = {}
@@ -24,3 +25,18 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def registartion(request):
+    args = {}
+    # args.update(csrf(request))
+    args['form']=RegistrationForm()
+    if request.POST:
+        newuser_form=RegistrationForm(request.POST)
+        if newuser_form.is_valid():
+            newuser_form.save()
+            newuser = auth.authenticate(username=newuser_form.cleaned_data['username'], password=newuser_form.cleaned_data['password2'])
+            auth.login(request, newuser)
+            return redirect('/')
+        else:
+            args['form'] = newuser_form
+    return render(request, 'registration.html', args)
