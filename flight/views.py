@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import Http404
+
 from flight.models import Route
 from django.contrib import auth
 
@@ -9,6 +11,9 @@ def all_route(request):
 
 def one_route(request, route_id):
     args = {}
-    args['route'] = Route.objects.get(id=route_id)
-    args['user'] = auth.get_user(request).username
+    try:
+        args['route'] = Route.objects.get(id=route_id)
+        args['username'] = auth.get_user(request).username
+    except Route.DoesNotExist:
+        raise Http404('Рейс не найден')
     return render(request, 'flight/one_route.html', args)
