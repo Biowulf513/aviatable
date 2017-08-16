@@ -18,18 +18,18 @@ def all_search(request, query=''):
                 search = Route.objects.filter(
                     Q(airport_out__name__icontains=query) | Q(airport_in__name__icontains=query)
                 )
-            return render(request, 'search_route.html', {'routes':search})
+            return render(request, 'flight/search_route.html', {'routes':search})
 
 
         elif request.GET.get('out')!='':
             query=request.GET['out']
             search = Route.objects.filter(
                 Q(airport_out__name__icontains=query))
-            return render(request, 'search_route.html', {'routes': search})
+            return render(request, 'flight/search_route.html', {'routes': search})
 
         elif request.GET.get('in')!='':
             query=request.GET['in']
             search = Route.objects.filter(
                 Q(airport_in__name__icontains=query))
-            return render(request, 'search_route.html', {'routes': search})
+            return render(request, 'flight/search_route.html', {'routes': search})
 
