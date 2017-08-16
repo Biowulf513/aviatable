@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 
 {% block title %}
-{{ route.code }}
+{{ args.route.code }}
 {% endblock %}
 
 {% block content %}
@@ -16,10 +16,10 @@
         </thead>
         <tbody>
                 <tr>
-                    <td>{{ route.code }}</td>
-                    <td>{{ route.airport_out }}</td>
-                    <td>{{ route.airport_in }}</td>
-                    <td>{{ route.plane }}</td>
+                    <td>{{ args[route.code]}}</td>
+                    <td>{{ args[route.airport_out]}}</td>
+                    <td>{{ args[route.airport_in]}}</td>
+                    <td>{{ args[route.plane]}}</td>
                 </tr>
             </tbody>
      </table>
