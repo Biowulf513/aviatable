@@ -11,7 +11,7 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap-search.css' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'flight/css/login.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'flight/css/style.css' %}" />
 
         <!-- HTML5 Shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- Предупреждение: Respond.js не работает при просмотре страницы через файл:// -->
@@ -24,39 +24,40 @@
     </head>
 
     <body>
-
-
         <div id="navigation">
             <nav class="navbar navbar-inverse navbar-static-top">
-                <div class="navbar-header">
-                    <!-- Кнопка «Гамбургер» отображается только в мобильном виде ) -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-                        <span class="sr-only">Открыть навигацию</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Бренд или название сайта (отображается в левой части меню) -->
-                    <a href="/" class="navbar-brand">Aviatable</a>
-                </div>
-                <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
-
-                <div class="collapse navbar-collapse" id="navbar-main">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/admin">Админка</a></li>
-                        <li>
-                            {% include 'aviatable/search_test.html' %}
-                        </li>
-                        {% if username %}
-                            <li>
-                                <a href="/auth/logout/"> Выйти ( {{ username.upper }} )</a>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href=/auth/login/"> Войти </a>
-                            </li>
-                        {% endif %}
-                    </ul>
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- Кнопка «Гамбургер» отображается только в мобильном виде ) -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                            <span class="sr-only">Открыть навигацию</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- Бренд или название сайта (отображается в левой части меню) -->
+                        <a href="/" class="navbar-brand">Aviatable</a>
+                    </div>
+                    <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
+                    <div class="pull-right">
+                        <div class="collapse navbar-collapse" id="navbar-main">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/admin">Админка</a></li>
+                                <li>
+                                    {% include 'aviatable/search_test.html' %}
+                                </li>
+                                {% if username %}
+                                    <li>
+                                        <a href="/auth/logout/"> Выйти ( {{ username.upper }} )</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href=/auth/login/"> Войти </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
