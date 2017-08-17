@@ -2,6 +2,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms import ModelForm
+
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -16,6 +18,13 @@ class RegistrationForm(UserCreationForm):
             'password1',
             'password2',
         )
+
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+        # adding css classes to widgets without define the fields:
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)

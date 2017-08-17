@@ -19,11 +19,12 @@ Including another URLconf
 """
 
 from django.conf.urls import url
-from flight.views import one_route
+from flight.views import one_route, all_route
 from flight.search import all_search
 
 urlpatterns = [
     url(r'^(?P<route_id>[0-9]+)/$', one_route, name='one_route'),
+    url(r'^$', all_route, name='all_route'),
     url(r'^search/$', all_search),
 ]
 
