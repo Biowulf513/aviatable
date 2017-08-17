@@ -7,13 +7,12 @@ from django.contrib import auth
 
 def all_route(request):
     routes = Route.objects.all()
-    return render(request, 'flight/all_route.html', {'routes':routes, 'username': auth.get_user(request).username})
+    return render(request, 'flight/all_route.html', {'routes':routes})
 
 def one_route(request, route_id):
     args = {}
     try:
         args['route'] = Route.objects.get(id=route_id)
-        args['username'] = auth.get_user(request).username
     except Route.DoesNotExist:
         raise Http404('Рейс не найден')
     return render(request, 'flight/one_route.html', args)
