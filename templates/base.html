@@ -42,7 +42,9 @@
                     <div class="pull-right">
                         <div class="collapse navbar-collapse" id="navbar-main">
                             <ul class="nav navbar-nav">
-                                <li><a href="/admin">Админка</a></li>
+                                {% if request.user.is_superuser %}
+                                    <li><a href="/admin">Админка</a></li>
+                                {% endif %}
                                 <li>
                                     {% include 'aviatable/search_test.html' %}
                                 </li>
