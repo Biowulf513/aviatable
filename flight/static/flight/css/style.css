@@ -2,3 +2,8 @@
     height: auto;
     background-color: yellowgreen;
 }
+#login {
+    max-width: 15%;
+    min-width: 181px;
+    margin: 0px auto;
+}
