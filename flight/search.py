@@ -29,13 +29,11 @@ def filter_search(request, ):
         query.append(Q(airport_in__name__icontains=request.GET['in']))
 
         context['routes'] = Route.objects.filter(query[0]).filter(query[1])
-        # if context['routes']:
-        #     # context['message'] = 'Такого рейса не существует'
-        #     # print(context)
-        #     return render(request, 'flight/search_route.html', context)
-        #
-        # else:
-            # context['message'] = 'Такого рейса не существует'
-        print (context)
+        if context['routes']:
+            return render(request, 'flight/search_route.html', context)
+
+        else:
+            context.clear()
+            context['message'] = 'Такого рейса не существует'
 
         return render(request, 'flight/search_route.html', context)
