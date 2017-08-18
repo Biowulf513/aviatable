@@ -1,13 +1,13 @@
 <div class="input-group" id="adv-search">
     <form id="search_text" action="/flight/search/" method="get">
-        <input type="text" class="form-control" name="search_q"  placeholder="Поиск рейса" />
+        <input type="text" class="form-control" name="search_q" required placeholder="Поиск рейса" />
     </form>
     <div class="input-group-btn">
         <div class="btn-group" role="group">
             <div class="dropdown dropdown-lg">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                 <div id="search-dropdown-menu" class="dropdown-menu dropdown-menu-right" role="menu">
-                    <form id="search_form" action="/flight/search/" method="get" class="form-horizontal" role="form">
+                    <form id="search_form" action="/flight/search/filter/" method="get" class="form-horizontal" role="form">
                       <div class="form-group">
                         <label for="filter">Место вылета</label>
                         <select name="out" class="form-control" >

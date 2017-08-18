@@ -45,7 +45,7 @@ class Plane(models.Model):
         super(Plane, self).save(*args,**kwargs)
 
     def __str__(self):
-        return ((self.plane_type.name) + ' | ' + (self.reg_numb))
+        return '%s (%s)' % (self.reg_numb, self.plane_type.name)
 
 class Country(models.Model):
     class Meta:
