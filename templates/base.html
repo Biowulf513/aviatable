@@ -67,6 +67,9 @@
         <div class="auth">
             {% block login %}{% endblock %}
         </div>
+        <div class="messages">
+            <p>{%  block message %}{% endblock %}</p>
+        </div>
         {% if request.user.is_authenticated %}
             <div class="content">
                 <div class="container">
