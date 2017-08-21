@@ -3,6 +3,8 @@ from string import digits, ascii_uppercase
 from transliterate import translit
 import random
 
+#Weather api
+import requests
 
 
 def code_generation(bad_text=None, text=''):
@@ -28,4 +30,11 @@ def search_lang(search_text):
     else:
         return 'ru'
 
+def weather_info(city_id=''):
+    days = 7
+    api_key = '21b44faf29243a93f1e83d29526352cc'
+    url = 'http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&cnt=%s&appid=%s' % (city_id, days, api_key)
 
+    req = requests.get(url)
+
+    return req.json()

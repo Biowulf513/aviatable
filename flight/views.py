@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 
 from flight.models import Route
+from flight.utils import weather_info
 
 
 def index(request):
@@ -16,9 +17,12 @@ def all_route(request):
     return render(request, 'flight/all_route.html', {'routes':routes})
 
 def one_route(request, route_id):
-    args = {}
+    content = {}
     try:
-        args['route'] = Route.objects.get(id=route_id)
+        content['route'] = Route.objects.get(id=route_id)
     except Route.DoesNotExist:
         raise Http404('Рейс не найден')
-    return render(request, 'flight/one_route.html', args)
+
+    # content['weather'] = weather_info('Moscow')
+    return render(request, 'flight/one_route.html', content)
+
