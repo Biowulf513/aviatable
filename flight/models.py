@@ -96,8 +96,6 @@ class Route(models.Model):
         name = '%s - %s | route %s | plane %s' % (self.airport_out.name, self.airport_in.name, self.code, self.plane.reg_numb)
         return name
 
-
-
     def save(self, *args, **kwargs):
         self.name = self.name_generation()
         self.code = route_name_generation(

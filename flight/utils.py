@@ -38,3 +38,16 @@ def weather_info(city_id=''):
     req = requests.get(url)
 
     return req.json()
+
+def airport_geoconing(airport=''):
+    api_key = 'AIzaSyBEyU7CLrolAMH0Ou8oi_FXxbQ1TVLpKPI'
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?&address=%s+терминал&key=%s&language=ru' %(airport, api_key)
+
+    json_data = requests.get(url)
+    print_data = json_data.json()
+    coords = print_data['results'][0]['geometry']['viewport']['northeast']
+    lat = coords['lat']
+    lng = coords['lng']
+    geocoding={'lat':lat, 'lng':lng}
+    return geocoding
+
