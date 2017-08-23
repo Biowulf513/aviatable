@@ -1,3 +1,9 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 #big {
     height: auto;
     background-color: yellowgreen;
@@ -16,4 +22,10 @@
 
 .error {
     color: white;
+}
+
+#map {
+    height: 40%;
+    width: 40%;
+    margin: 10% auto;
 }

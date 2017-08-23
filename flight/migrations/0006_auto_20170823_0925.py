@@ -15,13 +15,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='airport',
             name='lat',
-            field=models.FloatField(default=1, editable=False, max_length=30),
+            field=models.CharField(default=1, editable=False, max_length=30),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='airport',
             name='lng',
-            field=models.FloatField(default=1, editable=False, max_length=30),
+            field=models.CharField(default=1, editable=False, max_length=30),
             preserve_default=False,
         ),
     ]
