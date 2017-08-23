@@ -51,3 +51,20 @@ def airport_geoconing(airport=''):
     geocoding={'lat':lat, 'lng':lng}
     return geocoding
 
+def counrty_ISO_3166_1(country=''):
+    api_key = 'AIzaSyBEyU7CLrolAMH0Ou8oi_FXxbQ1TVLpKPI'
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?&address=%s&key=%s&language=ru' %(country, api_key)
+
+    json_data = requests.get(url)
+    print_data = json_data.json()
+
+    i=0
+    short_name = print_data ['results'][0]['address_components'][i]
+
+    while ('country' not in short_name['types'][0]):
+        i = i+1
+        short_name = print_data['results'][0]['address_components'][i]
+
+    ISO_3166_1 = {'short_name':short_name['short_name']}
+    return ISO_3166_1
+

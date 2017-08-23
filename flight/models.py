@@ -53,6 +53,13 @@ class Country(models.Model):
         verbose_name_plural = "Страны"
 
     name = models.CharField(max_length=40, verbose_name='Название Страны')
+    name_ISO_3166_1 = models.CharField(max_length=3,editable=False)
+
+    def save(self, *args, **kwargs):
+        from flight.utils import counrty_ISO_3166_1
+        ISO_3166_1 = counrty_ISO_3166_1(self.name)
+        self.name_ISO_3166_1 = ISO_3166_1['short_name']
+        super(Country, self).save(*args,**kwargs)
 
     def __str__(self):
         return self.name
