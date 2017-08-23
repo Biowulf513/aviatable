@@ -75,6 +75,15 @@ class Airport(models.Model):
 
     name = models.CharField(max_length=40, verbose_name='Название Аэропорта')
     sity_position = models.ForeignKey(City, verbose_name='Город', on_delete=models.CASCADE)
+    lat = models.FloatField(max_length=30,editable=False)
+    lng = models.FloatField(max_length=30,editable=False)
+
+    def save(self, *args, **kwargs):
+        from flight.utils import airport_geoconing
+        geocod = airport_geoconing(self.name)
+        self.lat = geocod['lat']
+        self.lng = geocod['lng']
+        super(Airport, self).save(*args,**kwargs)
 
     def __str__(self):
         return self.name
