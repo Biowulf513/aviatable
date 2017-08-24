@@ -68,3 +68,9 @@ def counrty_ISO_3166_1(country=''):
     ISO_3166_1 = {'short_name':short_name['short_name']}
     return ISO_3166_1
 
+def center_flyway(route):
+    lat_center = ((route.airport_out.lat + route.airport_in.lat) / 2)
+    lng_center = ((route.airport_out.lng + route.airport_in.lng) / 2)
+    center = [lat_center,lng_center]
+
+    return center
