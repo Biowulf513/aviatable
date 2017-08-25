@@ -23,5 +23,82 @@
             </tr>
         </tbody>
     </table>
-    {{ weather }}
+{#    {{ test }}#}
+{#    {{ route.airport_out.lat }}#}
+{#    {{ route.airport_out.lng }}#}
+{% endblock %}
+
+{% block gmap %}
+    <div id="map"></div>
+        <script>
+            var airport_out = {lat: {{ route.airport_out.lat }}, lng: {{ route.airport_out.lng }}};
+            var airport_in = {lat: {{ route.airport_in.lat }}, lng: {{ route.airport_in.lng }}};
+
+            function initMap() {
+
+                function flyway_center() {
+                    var lat_center = ((airport_out['lat'] + airport_in['lat']) / 2);
+                    var lng_center = ((airport_out['lng'] + airport_in['lng']) / 2);
+                    var way_center = [lat_center , lng_center];
+                    console.log({lat:lat_center, lng:lng_center});
+                    return {lat:lat_center, lng:lng_center};
+                }
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 2,
+                    center: flyway_center()
+                });
+                var iconBase = '{{ STATIC_PREFIX }}flight/images/map_labels/';
+
+                marker1 = new google.maps.Marker({
+                    map: map,
+                    position: airport_out,
+                    icon: iconBase + "out_bs.png"
+                });
+
+                marker2 = new google.maps.Marker({
+                    map: map,
+                    position: airport_in,
+                    icon: iconBase + "in_bs.png"
+                });
+
+                {#            marker3 = new google.maps.Marker({#}
+                {#              map: map,#}
+                {#              position: flyway_center(),#}
+                {#              icon: iconBase + "in_bs.png"#}
+                {#            });#}
+
+                var bounds = new google.maps.LatLngBounds();
+
+{#                Прямая линия между точками#}
+                poly = new google.maps.Polyline({
+{#                    strokeColor: '#FF0000',#}
+{#                    strokeOpacity: 1.0,#}
+{#                    strokeWeight: 3,#}
+{#                    map: map#}
+                });
+
+{#                Сферическая интерполяция#}
+                geodesicPoly = new google.maps.Polyline({
+                    strokeColor: '#35de32',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3,
+                    geodesic: true,
+                    map: map
+                });
+
+                update();
+                }
+
+                function update() {
+                var path = [marker1.getPosition(), marker2.getPosition()];
+                poly.setPath(path);
+                geodesicPoly.setPath(path);
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEyU7CLrolAMH0Ou8oi_FXxbQ1TVLpKPI&libraries=geometry&callback=initMap"
+        async defer></script>
+
+
+
 {% endblock %}

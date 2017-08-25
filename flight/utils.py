@@ -38,3 +38,39 @@ def weather_info(city_id=''):
     req = requests.get(url)
 
     return req.json()
+
+def airport_geoconing(airport=''):
+    api_key = 'AIzaSyBEyU7CLrolAMH0Ou8oi_FXxbQ1TVLpKPI'
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?&address=%s+терминал&key=%s&language=ru' %(airport, api_key)
+
+    json_data = requests.get(url)
+    print_data = json_data.json()
+    coords = print_data['results'][0]['geometry']['viewport']['northeast']
+    lat = coords['lat']
+    lng = coords['lng']
+    geocoding={'lat':lat, 'lng':lng}
+    return geocoding
+
+def counrty_ISO_3166_1(country=''):
+    api_key = 'AIzaSyBEyU7CLrolAMH0Ou8oi_FXxbQ1TVLpKPI'
+    url = 'https://maps.googleapis.com/maps/api/geocode/json?&address=%s&key=%s&language=ru' %(country, api_key)
+
+    json_data = requests.get(url)
+    print_data = json_data.json()
+
+    i=0
+    short_name = print_data ['results'][0]['address_components'][i]
+
+    while ('country' not in short_name['types'][0]):
+        i = i+1
+        short_name = print_data['results'][0]['address_components'][i]
+
+    ISO_3166_1 = {'short_name':short_name['short_name']}
+    return ISO_3166_1
+
+def center_flyway(route):
+    lat_center = ((route.airport_out.lat + route.airport_in.lat) / 2)
+    lng_center = ((route.airport_out.lng + route.airport_in.lng) / 2)
+    center = [lat_center,lng_center]
+
+    return center

@@ -53,6 +53,13 @@ class Country(models.Model):
         verbose_name_plural = "Страны"
 
     name = models.CharField(max_length=40, verbose_name='Название Страны')
+    name_ISO_3166_1 = models.CharField(max_length=3,editable=False)
+
+    def save(self, *args, **kwargs):
+        from flight.utils import counrty_ISO_3166_1
+        ISO_3166_1 = counrty_ISO_3166_1(self.name)
+        self.name_ISO_3166_1 = ISO_3166_1['short_name']
+        super(Country, self).save(*args,**kwargs)
 
     def __str__(self):
         return self.name
@@ -75,6 +82,15 @@ class Airport(models.Model):
 
     name = models.CharField(max_length=40, verbose_name='Название Аэропорта')
     sity_position = models.ForeignKey(City, verbose_name='Город', on_delete=models.CASCADE)
+    lat = models.CharField(max_length=30,editable=False)
+    lng = models.CharField(max_length=30,editable=False)
+
+    def save(self, *args, **kwargs):
+        from flight.utils import airport_geoconing
+        geocod = airport_geoconing(self.name)
+        self.lat = geocod['lat']
+        self.lng = geocod['lng']
+        super(Airport, self).save(*args,**kwargs)
 
     def __str__(self):
         return self.name
@@ -95,8 +111,6 @@ class Route(models.Model):
     def name_generation(self):
         name = '%s - %s | route %s | plane %s' % (self.airport_out.name, self.airport_in.name, self.code, self.plane.reg_numb)
         return name
-
-
 
     def save(self, *args, **kwargs):
         self.name = self.name_generation()
