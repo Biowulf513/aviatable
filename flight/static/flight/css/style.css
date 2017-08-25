@@ -1,4 +1,31 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 #big {
     height: auto;
     background-color: yellowgreen;
+}
+#login {
+    max-width: 15%;
+    min-width: 181px;
+    margin: 0px auto;
+}
+
+#registration {
+    max-width: 15%;
+    min-width: 181px;
+    margin: 0px auto;
+}
+
+.error {
+    color: white;
+}
+
+#map {
+    height: 50%;
+    width: 40%;
+    margin: 0 auto;
 }

@@ -5,6 +5,10 @@ from django.contrib import auth
 from django.template.context_processors import csrf
 from aviatable.forms import RegistrationForm
 
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
+
 def login(request):
     args = {}
     args.update(csrf(request))
@@ -17,14 +21,9 @@ def login(request):
             return redirect('/')
         else:
             args['login_error']='Пользователь не найден'
-            return render_to_response('login.html', args)
+            return render_to_response('aviatable/login.html', args)
     else:
-        return render_to_response('login.html', args)
-
-
-def logout(request):
-    auth.logout(request)
-    return redirect('/')
+        return render_to_response('aviatable/login.html', args)
 
 def registartion(request):
     args = {}
@@ -39,4 +38,4 @@ def registartion(request):
             return redirect('/')
         else:
             args['form'] = newuser_form
-    return render(request, 'registration.html', args)
+    return render(request, 'aviatable/registration.html', args)

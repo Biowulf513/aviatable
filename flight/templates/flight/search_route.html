@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Search
+{% endblock %}
+
+{% block content %}
+    {% if routes %}
+        <table class="table">
+                <thead>
+                    <tr>
+                        <th>Рейс</th>
+                        <th>Вылет</th>
+                        <th>Прилёт</th>
+                        <th>Самолёт</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for route in routes%}
+                        <tr>
+                            <td><a href="{% url 'one_route' route_id=route.id %}">{{ route.code }}</a></td>
+                            <td>{{ route.airport_out }}</td>
+                            <td>{{ route.airport_in }}</td>
+                            <td>{{ route.plane }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+         </table>
+    {% else %}
+        <div class="alert alert-danger text-center" role="alert">{{ message }}</div>
+    {% endif %}
+{% endblock %}
